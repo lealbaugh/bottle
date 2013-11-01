@@ -1,10 +1,11 @@
+{% if database %}
 Here are the URLs we know about:
 <ul>
 {% for key in database.keys() %}
   <li>{{ key }}: {{ database[key] }}</li>
 {% endfor %}
 </ul>
-
+{% endif %}
 
 <form action="/" method="post">
 Shorten: <input type="text" name="URL" />

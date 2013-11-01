@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 database={}
 mostrecent = ""
+filename = "db.text"
 
 @app.route('/', methods=['GET'])
 def index():
@@ -20,6 +21,9 @@ def handle_form():
 		newURL = cleanse(newURL)
 		shortened = shortify(newURL)
 		database[shortened] = newURL
+		with open(filename, 'a') as f:
+			f.write(shortened+"|"+newURL+"\n")
+			f.close()
 		mostrecent = shortened
 		return render_template("shortener.html", database=database, mostrecent=mostrecent)
 
@@ -41,7 +45,14 @@ def redirect_to_longer(shortened):
 	else:
 		return "Sorry, we don't seem to have that one yet."
 
-if __name__ == "__main__":
-    app.run(debug=True)
+def initDataBase(filename):
+	with open(filename, 'r') as f:
+		for line in f:
+			data = line.split("|")
+			database[data[0]] = data[1]
+		f.close()
 
+if __name__ == "__main__":
+	initDataBase(filename)
+	app.run(debug=True)
 
