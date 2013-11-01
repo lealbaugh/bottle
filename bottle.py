@@ -8,9 +8,11 @@ database={}
 mostrecent = ""
 filename = "db.text"
 
+
+
 @app.route('/', methods=['GET'])
 def index():
-	return render_template("shortener.html", database=database, mostrecent=mostrecent)
+	return render_template("shortener.html", database=database, mostrecent=mostrecent, host = url_for('/', _external=True))
 
 @app.route('/', methods=['POST'])
 def handle_form():
@@ -25,7 +27,7 @@ def handle_form():
 			f.write(shortened+"|"+newURL+"\n")
 			f.close()
 		mostrecent = shortened
-		return render_template("shortener.html", database=database, mostrecent=mostrecent)
+		return render_template("shortener.html", database=database, mostrecent=mostrecent, host = url_for('/', _external=True))
 
 def shortify(URL):
 	shortened = URL[7:]
