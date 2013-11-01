@@ -56,5 +56,5 @@ def initDataBase(filename):
 
 if __name__ == "__main__":
 	initDataBase(filename)
-	app.run(debug=True)
+	app.run()
 
