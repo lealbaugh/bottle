@@ -13,7 +13,7 @@ Shorten: <input type="text" name="URL" />
 </form>
 
 {% if mostrecent %}
-Here's your bottled URL: <a href="{{ mostrecent }}">{{host+ mostrecent }}</a>
+Here's your bottled URL: <a href="{{ mostrecent }}">{{ "http://127.0.0.1:5000" + mostrecent }}</a>
 {% endif %}
 
 <form action="/" method="post">
